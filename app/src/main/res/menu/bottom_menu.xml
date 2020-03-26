@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/bottom_menu_garage"
+        android:icon="@drawable/ic_menu_garage"
+        android:title="车库信息"
+        />
+    <item android:id="@+id/bottom_menu_fast"
+        android:icon="@drawable/ic_menu_fast"
+        android:title="快速预定"
+        />
+    <item android:id="@+id/bottom_menu_navi"
+        android:icon="@drawable/ic_menu_navi"
+        android:title="行车记录"
+        />
+    <item android:id="@+id/bottom_menu_about"
+        android:icon="@drawable/ic_menu_about"
+        android:title="个人中心"
+        />
+</menu>
