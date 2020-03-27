@@ -1,4 +1,4 @@
-package smartgarage.com.smartgarage.util;
+package com.smartgarage.util;
 
 
 import android.support.v4.app.Fragment;

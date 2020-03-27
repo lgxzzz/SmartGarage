@@ -48,12 +48,5 @@
             />
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/about_person_info_layout"
-        android:orientation="vertical"
-        >
-
-    </LinearLayout>
+    <include layout="@layout/fragment_about_person"></include>
 </LinearLayout>

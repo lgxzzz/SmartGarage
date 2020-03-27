@@ -1,10 +1,11 @@
-package smartgarage.com.smartgarage;
+package com.smartgarage;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import smartgarage.com.smartgarage.fragment.AboutFragment;
-import smartgarage.com.smartgarage.util.FragmentUtils;
+import com.smartgarage.fragment.AboutFragment;
+import com.smartgarage.util.FragmentUtils;
+
 
 public class MainActivity extends BaseActivtiy {
 

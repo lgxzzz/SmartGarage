@@ -1,4 +1,4 @@
-package smartgarage.com.smartgarage;
+package com.smartgarage;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

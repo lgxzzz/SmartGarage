@@ -1,4 +1,4 @@
-package smartgarage.com.smartgarage.fragment;
+package com.smartgarage.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -8,7 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import smartgarage.com.smartgarage.R;
+import com.smartgarage.R;
+
 
 public class AboutFragment extends Fragment{
 
