@@ -13,13 +13,24 @@ import com.smartgarage.R;
 
 public class AboutFragment extends Fragment{
 
+
+
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view =  inflater.inflate(R.layout.fragment_about, container, false);
+        initView();
+        initData();
         return view;
     }
 
     public static AboutFragment getInstance() {
         return new AboutFragment();
     }
+
+    public void initView(){};
+
+    public void initData(){
+
+    };
 }
