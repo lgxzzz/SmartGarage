@@ -49,4 +49,7 @@
     </LinearLayout>
 
     <include layout="@layout/fragment_about_person"></include>
+    <include layout="@layout/fragment_about_car"  android:visibility="gone"></include>
+    <include layout="@layout/fragment_about_purchase_history" android:visibility="gone"></include>
+    <include layout="@layout/fragment_about_recharge" android:visibility="gone"></include>
 </LinearLayout>
