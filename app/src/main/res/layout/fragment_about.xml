@@ -12,6 +12,7 @@
         android:layout_marginTop="10dp"
         >
         <Button
+            android:id="@+id/about_person_btn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -21,6 +22,7 @@
             android:textSize="18dp"
             />
         <Button
+            android:id="@+id/about_car_btn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -30,6 +32,7 @@
             android:textSize="18dp"
             />
         <Button
+            android:id="@+id/about_purchase_btn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -39,6 +42,7 @@
             android:textSize="18dp"
             />
         <Button
+            android:id="@+id/about_recharge_btn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -50,6 +54,6 @@
 
     <include layout="@layout/fragment_about_person"></include>
     <include layout="@layout/fragment_about_car"  android:visibility="gone"></include>
-    <include layout="@layout/fragment_about_purchase_history" android:visibility="gone"></include>
+    <include layout="@layout/fragment_about_purchase_history" android:visibility="gone" ></include>
     <include layout="@layout/fragment_about_recharge" android:visibility="gone"></include>
 </LinearLayout>

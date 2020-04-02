@@ -18,7 +18,7 @@ public class FastFragment extends Fragment{
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view =  inflater.inflate(R.layout.fragment_garage, container, false);
+        View view =  inflater.inflate(R.layout.fragment_fast, container, false);
         initView();
         initData();
         return view;

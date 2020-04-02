@@ -1,15 +1,24 @@
 package com.smartgarage.bean;
 
 public class User {
-    private int UserId;
+    private String UserId;
     private String UserName;
     private String Password;
+    private String RFIID;
     private String RepeatPassword;
     private int RoleId;
     private String Sex;
     private String Telephone;
     private String IdCard;
     private String UserPhoto;
+
+    public String getRFIID() {
+        return RFIID;
+    }
+
+    public void setRFIID(String RFIID) {
+        this.RFIID = RFIID;
+    }
 
     public String getRepeatPassword() {
         return RepeatPassword;
@@ -19,11 +28,11 @@ public class User {
         RepeatPassword = repeatPassword;
     }
 
-    public int getUserId() {
+    public String getUserId() {
         return UserId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(String userId) {
         UserId = userId;
     }
 

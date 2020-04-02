@@ -17,7 +17,7 @@
                 android:layout_height="wrap_content"
                 android:text="2020-03-28 18:30:42"
                 android:textColor="@android:color/black"
-                android:id="@+id/purchase_time"
+                android:id="@+id/add_time"
                 android:layout_marginLeft="10dp"
                 />
             <TextView
@@ -28,19 +28,9 @@
                 android:textColor="@android:color/black"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:id="@+id/purchase_cost"
+                android:id="@+id/add_cost"
                 android:gravity="center"
                 />
-            <TextView
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:text="详情"
-                android:layout_marginRight="20dp"
-                android:background="@android:color/holo_blue_bright"
-                android:textColor="@android:color/white"
-                android:layout_marginLeft="30dp"
-                android:id="@+id/purchase_detail"
-                android:gravity="center"
-                />
+
         </LinearLayout>
 </LinearLayout>

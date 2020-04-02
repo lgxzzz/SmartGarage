@@ -46,4 +46,8 @@ public class TitleView extends RelativeLayout{
     public void setTitle(String title){
         mTitleView.setText(title);
     }
+
+    public void setOnBackListener(View.OnClickListener listener){
+        mBackBtn.setOnClickListener(listener);
+    }
 }

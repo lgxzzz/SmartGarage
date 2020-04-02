@@ -5,11 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:id="@+id/about_car_info_layout"
     >
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@android:color/black"
+        android:id="@+id/add_car_btn"
         android:text="增加车辆"
         />
         <ListView

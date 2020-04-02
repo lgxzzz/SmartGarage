@@ -14,7 +14,7 @@ public class SQLiteDbHelper extends SQLiteOpenHelper {
     //数据库名称
     public static final String DB_NAME = "SmartCar.db";
     //数据库版本号
-    public static int DB_VERSION = 1;
+    public static int DB_VERSION = 10;
     //用户表
     public static final String TAB_USER = "UserInfo";
     //用户角色表
@@ -56,12 +56,12 @@ public class SQLiteDbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
-        db.execSQL("DROP TABLE IF EXISTS "+TAB_USER);
-        db.execSQL("DROP TABLE IF EXISTS "+TAB_ROLE);
-        db.execSQL("DROP TABLE IF EXISTS "+TAB_CARINFO);
+//        db.execSQL("DROP TABLE IF EXISTS "+TAB_USER);
+//        db.execSQL("DROP TABLE IF EXISTS "+TAB_ROLE);
+//        db.execSQL("DROP TABLE IF EXISTS "+TAB_CARINFO);
         db.execSQL("DROP TABLE IF EXISTS "+TAB_CARPORTINFO);
         db.execSQL("DROP TABLE IF EXISTS "+TAB_PARKINGSAPCEINFO);
-        db.execSQL("DROP TABLE IF EXISTS "+TAB_RFI);
+//        db.execSQL("DROP TABLE IF EXISTS "+TAB_RFI);
         db.execSQL("DROP TABLE IF EXISTS "+TAB_PARKINGINFO);
         db.execSQL("DROP TABLE IF EXISTS "+TAB_BILLINFO);
         db.execSQL("DROP TABLE IF EXISTS "+TAB_ROUTEINFO);
@@ -72,9 +72,10 @@ public class SQLiteDbHelper extends SQLiteOpenHelper {
     //创建用户表
     public void createTableUser(SQLiteDatabase db){
         db.execSQL("CREATE TABLE IF NOT EXISTS "+TAB_USER +
-                "(UserId integer primary key autoincrement, " +
+                "(UserId varchar(60) primary key, " +
                 "UserName varchar(60), " +
                 "Password varchar(60), " +
+                "RFIId varchar(60), " +
                 "RoleId integer, " +
                 "Sex varchar(1), " +
                 "Telephone varchar(60), " +
@@ -92,7 +93,7 @@ public class SQLiteDbHelper extends SQLiteOpenHelper {
     //创建车辆信息表
     public void createTableCarInfo(SQLiteDatabase db){
         db.execSQL("CREATE TABLE IF NOT EXISTS "+TAB_CARINFO +
-                "(CarId integer primary key autoincrement, " +
+                "(CarId varchar(60) primary key, " +
                 "UserId varchar(60), " +
                 "Type varchar(60), " +
                 "CarPhoto text)");
@@ -101,7 +102,7 @@ public class SQLiteDbHelper extends SQLiteOpenHelper {
     //创建车库信息表
     public void createTableCarPortInfo(SQLiteDatabase db){
         db.execSQL("CREATE TABLE IF NOT EXISTS "+TAB_CARPORTINFO +
-                "(CarPortId integer primary key autoincrement, " +
+                "(CarPortId varchar(60) primary key, " +
                 "CarPortName varchar(60), " +
                 "Content integer, " +
                 "IsFilled integer, " +
@@ -117,7 +118,7 @@ public class SQLiteDbHelper extends SQLiteOpenHelper {
     //创建车位信息表
     public void createTableParkingSpaceInfo(SQLiteDatabase db){
         db.execSQL("CREATE TABLE IF NOT EXISTS "+TAB_PARKINGSAPCEINFO +
-                "(PlaceId varchar(60) primary key autoincrement, " +
+                "(PlaceId varchar(60) primary key, " +
                 "CarPortId integer, " +
                 "State varchar(60))");
     }
@@ -125,7 +126,7 @@ public class SQLiteDbHelper extends SQLiteOpenHelper {
     //创建RFID卡信息表
     public void createTableRFI(SQLiteDatabase db){
         db.execSQL("CREATE TABLE IF NOT EXISTS "+TAB_RFI +
-                "(RFIId varchar(60) primary key autoincrement, " +
+                "(RFIId varchar(60) primary key, " +
                 "UserId varchar(60), " +
                 "Remain varchar(60))");
     }
@@ -133,7 +134,7 @@ public class SQLiteDbHelper extends SQLiteOpenHelper {
     //创建停车记录信息表
     public void createTableParkingInfo(SQLiteDatabase db){
         db.execSQL("CREATE TABLE IF NOT EXISTS "+TAB_PARKINGINFO +
-                "(RecordId integer primary key autoincrement, " +
+                "(RecordId varchar(60) primary key, " +
                 "CarPortId integer, " +
                 "UserId varchar(60), " +
                 "CarId varchar(60), " +
@@ -149,12 +150,11 @@ public class SQLiteDbHelper extends SQLiteOpenHelper {
     //创建消费表
     public void createTableBillInfo(SQLiteDatabase db){
         db.execSQL("CREATE TABLE IF NOT EXISTS "+TAB_BILLINFO +
-                "(BillId integer primary key autoincrement, " +
+                "(BillId varchar(60) primary key, " +
                 "CarPortId integer, " +
                 "RecordId integer, " +
                 "UserId varchar(60), " +
                 "BillDate varchar(60), " +
-                "UserId varchar(60), " +
                 "Cost varchar(60), " +
                 "PayWay varchar(60))");
     }
@@ -162,7 +162,7 @@ public class SQLiteDbHelper extends SQLiteOpenHelper {
     //创建路线信息表
     public void createTableRouteInfo(SQLiteDatabase db){
         db.execSQL("CREATE TABLE IF NOT EXISTS "+TAB_ROUTEINFO +
-                "(RouteId varchar(60) primary key autoincrement, " +
+                "(RouteId varchar(60) primary key, " +
                 "UserId varchar(60), " +
                 "Point text, " +
                 "RouteDate varchar(60), " +
@@ -172,10 +172,9 @@ public class SQLiteDbHelper extends SQLiteOpenHelper {
     //创建用户充值表
     public void createTableAddMoneyInfo(SQLiteDatabase db){
         db.execSQL("CREATE TABLE IF NOT EXISTS "+TAB_ADDMONEYINFO +
-                "(AddId integer primary key autoincrement, " +
+                "(AddId varchar(60) primary key, " +
                 "UserId varchar(60), " +
                 "AddDate varchar(60), " +
-                "UserId varchar(60), " +
                 "AddMoney varchar(60), " +
                 "PayWay varchar(60))");
     }

@@ -1,14 +1,19 @@
 package com.smartgarage;
 
+import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.smartgarage.data.DBManger;
 import com.smartgarage.view.TitleView;
 
 
@@ -20,6 +25,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private EditText mPassWordEd;
     private String mName;
     private String mPassWord;
+    private Button mLoginBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +43,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         mNameEd = findViewById(R.id.reg_name_ed);
         mPassWordEd = findViewById(R.id.reg_password_ed);
+
+        mLoginBtn = findViewById(R.id.reg_login_btn);
+        mLoginBtn.setOnClickListener(this);
 
         mNameEd.addTextChangedListener(new TextWatcher() {
             @Override
@@ -80,7 +89,19 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
                 break;
             case R.id.reg_login_btn:
+                DBManger.getInstance(LoginActivity.this).login(mName, mPassWord, new DBManger.IListener() {
+                    @Override
+                    public void onSuccess() {
+                        Toast.makeText(LoginActivity.this,"登陆成功",Toast.LENGTH_LONG).show();
+                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                        LoginActivity.this.finish();
+                    }
 
+                    @Override
+                    public void onError(String error) {
+                        Toast.makeText(LoginActivity.this,error,Toast.LENGTH_LONG).show();
+                    }
+                });
                 break;
         }
     }
