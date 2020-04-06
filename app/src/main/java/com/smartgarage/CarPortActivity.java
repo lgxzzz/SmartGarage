@@ -15,6 +15,13 @@ public class CarPortActivity extends Activity{
     private TitleView mTitleView;
     private TextView mGarageName;
     private TextView mGarageAddress;
+    private TextView mGarageContent;
+    private TextView mGarageIsFilled;
+    private TextView mGarageIsOrder;
+    private TextView mGarageRemainingNumber;
+    private TextView mGaragePrice;
+    private TextView mGarageOrderPrice;
+
     private TextView mParkingPlaceBtn;
 
 
@@ -32,12 +39,25 @@ public class CarPortActivity extends Activity{
 
         mGarageName = findViewById(R.id.garage_name);
         mGarageAddress = findViewById(R.id.garage_address);
+        mGarageContent = findViewById(R.id.garage_content);
+        mGarageIsFilled = findViewById(R.id.garage_isfill);
+        mGarageIsOrder = findViewById(R.id.garage_isorder);
+        mGarageRemainingNumber = findViewById(R.id.garage_remain);
+        mGaragePrice = findViewById(R.id.garage_price);
+        mGarageOrderPrice = findViewById(R.id.garage_order_price);
+
         mParkingPlaceBtn = findViewById(R.id.parkingplace_detail_btn);
 
         final CarPort carPort = (CarPort) getIntent().getExtras().getSerializable("carPort");
         if (carPort!=null){
             mGarageAddress.setText(carPort.getAddress());
             mGarageName.setText(carPort.getCarPortName());
+            mGarageContent.setText(carPort.getContent());
+            mGarageIsFilled.setText(carPort.getIsFilled());
+            mGarageIsOrder.setText(carPort.getIsOrder());
+            mGarageRemainingNumber.setText(carPort.getRemainingNumber());
+            mGaragePrice.setText(carPort.getPrice());
+            mGarageOrderPrice.setText(carPort.getOrderPrice());
         }
 
         mParkingPlaceBtn.setOnClickListener(new View.OnClickListener() {

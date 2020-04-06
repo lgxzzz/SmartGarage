@@ -24,6 +24,7 @@ import com.smartgarage.bean.CarPort;
 import com.smartgarage.data.DBManger;
 import com.smartgarage.navi.LocationMgr;
 import com.smartgarage.navi.PoiSearchMgr;
+import com.smartgarage.util.DataFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -79,11 +80,14 @@ public class GarageFragment extends Fragment{
                 for (int i = 0;i<poiItems.size();i++){
                     PoiItem item = poiItems.get(i);
                     CarPort carPort = new CarPort();
+                    //此部分是真实数据
                     carPort.setCarPortName(item.getTitle());
                     carPort.setAddress(item.getSnippet());
                     LatLonPoint latLonPoint = item.getLatLonPoint();
                     carPort.setLat(latLonPoint.getLatitude());
                     carPort.setLon(latLonPoint.getLongitude());
+                    //此处是模拟数据
+                    carPort = DataFactory.createCarPortData(carPort);
                     mCarPorts.add(carPort);
                 }
 
