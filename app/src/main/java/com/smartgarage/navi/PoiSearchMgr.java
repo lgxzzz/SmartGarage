@@ -53,7 +53,7 @@ public class PoiSearchMgr implements PoiSearch.OnPoiSearchListener {
         if (latLonPoint != null) {
             poiSearch = new PoiSearch(mContext, query);
             poiSearch.setOnPoiSearchListener(this);
-            poiSearch.setBound(new PoiSearch.SearchBound(latLonPoint, 3000, true));//设置搜索范围
+            poiSearch.setBound(new PoiSearch.SearchBound(latLonPoint, 30000, true));//设置搜索范围
             poiSearch.searchPOIAsyn();// 异步搜索
         }
 

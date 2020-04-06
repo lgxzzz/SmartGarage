@@ -6,9 +6,11 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import com.amap.api.maps.model.LatLng;
 import com.smartgarage.bean.AddMoney;
 import com.smartgarage.bean.Car;
 import com.smartgarage.bean.CarPort;
+import com.smartgarage.bean.PathInfo;
 import com.smartgarage.bean.Purchase;
 import com.smartgarage.bean.User;
 
@@ -22,6 +24,9 @@ public class DBManger {
     private Context mContext;
     private SQLiteDbHelper mDBHelper;
     public User mUser;
+    private LatLng mCurPoint; //最终选择的点
+    public List<CarPort> mCarPorts = new ArrayList<>();
+    public List<PathInfo> mPaths = new ArrayList<>();
     public static  DBManger instance;
 
     public static DBManger getInstance(Context mContext){
@@ -36,7 +41,29 @@ public class DBManger {
         mDBHelper = new SQLiteDbHelper(mContext);
     }
 
+    public List<PathInfo> getmPaths() {
+        return mPaths;
+    }
 
+    public void setmPaths(List<PathInfo> mPaths) {
+        this.mPaths = mPaths;
+    }
+
+    public LatLng getmCurPoint() {
+        return mCurPoint;
+    }
+
+    public void setmCurPoint(LatLng mCurPoint) {
+        this.mCurPoint = mCurPoint;
+    }
+
+    public List<CarPort> getmCarPorts() {
+        return mCarPorts;
+    }
+
+    public void setmCarPorts(List<CarPort> mCarPorts) {
+        this.mCarPorts = mCarPorts;
+    }
 
     //生成随机15位的user编号
     public String getRandomUserID(){
@@ -180,7 +207,7 @@ public class DBManger {
             while (cursor.moveToNext()){
                 String CarId = cursor.getString(cursor.getColumnIndex("CarId"));
                 String UserId = cursor.getString(cursor.getColumnIndex("UserId"));
-                String Type = cursor.getString(cursor.getColumnIndex("UserId"));
+                String Type = cursor.getString(cursor.getColumnIndex("Type"));
                 Car car = new Car();
                 car.setCarId(CarId);
                 car.setUserId(UserId);
@@ -261,16 +288,6 @@ public class DBManger {
             strRand += String.valueOf((int)(Math.random() * 10)) ;
         }
         return strRand;
-    }
-
-    //生成两个默认车库
-    public List<CarPort> getDefaultCarPorts(){
-        List<CarPort> carPorts = new ArrayList<>();
-        CarPort port = new CarPort();
-        port.setAddress("杨家坪轻轨站北100米");
-        port.setCarPortName("杨家坪大洋百货停车场");
-        carPorts.add(port);
-        return carPorts;
     }
 
     public interface IListener{

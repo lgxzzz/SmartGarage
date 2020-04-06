@@ -1,6 +1,8 @@
 package com.smartgarage.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +10,8 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.smartgarage.CarPortActivity;
+import com.smartgarage.ParkingSpaceActivity;
 import com.smartgarage.R;
 import com.smartgarage.bean.Car;
 import com.smartgarage.bean.CarPort;
@@ -59,6 +63,12 @@ public class CarPortAdapter extends BaseAdapter{
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(mContext,CarPortActivity.class);
+                Bundle b = new Bundle();
+                b.putSerializable("carPort",carport);
+                intent.putExtras(b);
+                mContext.startActivity(intent);
 
             }
         });

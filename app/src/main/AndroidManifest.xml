@@ -21,7 +21,7 @@
         android:supportsRtl="true"
         android:name=".GarageApplication"
         android:theme="@style/AppTheme">
-        <meta-data android:name="com.amap.api.v2.apikey" android:value="4b42a3c0897418c4bafd826bb3d5e626">
+        <meta-data android:name="com.amap.api.v2.apikey" android:value="6a53afde2193756611dbe44ab30818a3">
         </meta-data>
         <activity android:name=".SplashActivity">
             <intent-filter>
@@ -35,6 +35,11 @@
         <activity android:name=".RegisterActivity"></activity>
         <activity android:name=".UpdateActivity"/>
         <activity android:name=".AddCarActivity"/>
+        <activity android:name=".ParkingSpaceActivity"/>
+        <activity android:name=".CarPortActivity"/>
+        <activity android:name=".FastNaviActivity"/>
+        <activity android:name=".DrivingRecordActivity"/>
+        <activity android:name=".PathActivity"/>
         <service android:name="com.amap.api.location.APSService"></service>
         <activity android:name="com.amap.api.navi.AmapRouteActivity"
             android:theme="@android:style/Theme.NoTitleBar"

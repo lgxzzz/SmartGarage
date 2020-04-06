@@ -2,14 +2,13 @@ package com.smartgarage;
 
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.smartgarage.fragment.AboutFragment;
 import com.smartgarage.fragment.FastFragment;
 import com.smartgarage.fragment.GarageFragment;
-import com.smartgarage.fragment.NaviFragment;
+import com.smartgarage.fragment.DrivingRecordFragment;
 import com.smartgarage.util.FragmentUtils;
 import com.smartgarage.view.TitleView;
 
@@ -42,7 +41,7 @@ public class MainActivity extends BaseActivtiy {
         mTitleView = findViewById(R.id.title_view);
         mTitleView.setBackBtnVisible(false);
 
-        mBottomMenu.setSelectedItemId(R.id.bottom_menu_about);
+        mBottomMenu.setSelectedItemId(R.id.bottom_menu_garage);
 
     }
 
@@ -62,7 +61,7 @@ public class MainActivity extends BaseActivtiy {
                 mTitleView.setTitle("快速预定");
                 break;
             case R.id.bottom_menu_navi:
-                FragmentUtils.replaceFragmentToActivity(fragmentManager, NaviFragment.getInstance(),R.id.main_frame);
+                FragmentUtils.replaceFragmentToActivity(fragmentManager, DrivingRecordFragment.getInstance(),R.id.main_frame);
                 mTitleView.setTitle("行车记录");
                 break;
             case R.id.bottom_menu_about:
