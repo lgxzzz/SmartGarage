@@ -181,7 +181,7 @@ public class RegisterActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess() {
                         Toast.makeText(RegisterActivity.this,"注册成功！",Toast.LENGTH_LONG).show();
-                        startActivity(new Intent(RegisterActivity.this, MainActivity.class));
+                        goToLogin();
                     }
 
                     @Override
@@ -189,6 +189,22 @@ public class RegisterActivity extends AppCompatActivity {
                         Toast.makeText(RegisterActivity.this,"注册失败！",Toast.LENGTH_LONG).show();
                     }
                 });
+            }
+        });
+    }
+
+    public void goToLogin(){
+        DBManger.getInstance(RegisterActivity.this).login(mUser.getUserName(), mUser.getPassword(), new DBManger.IListener() {
+            @Override
+            public void onSuccess() {
+                Toast.makeText(RegisterActivity.this,"登陆成功",Toast.LENGTH_LONG).show();
+                startActivity(new Intent(RegisterActivity.this, MainActivity.class));
+                RegisterActivity.this.finish();
+            }
+
+            @Override
+            public void onError(String error) {
+                Toast.makeText(RegisterActivity.this,error,Toast.LENGTH_LONG).show();
             }
         });
     }

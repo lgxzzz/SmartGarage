@@ -1,17 +1,21 @@
 package com.smartgarage.util;
 
+import android.content.Context;
 import android.content.Intent;
 
+import com.smartgarage.bean.Car;
 import com.smartgarage.bean.CarPort;
 import com.smartgarage.bean.ParkingSpaceInfo;
+import com.smartgarage.bean.Purchase;
+import com.smartgarage.data.DBManger;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 public class DataFactory {
+    //随机生成车库信息
     public static CarPort createCarPortData(CarPort carPort){
-        //随机生成车库信息
         int Content = (int)(50*Math.random()+50);
         int IsFilled = (int)(10*Math.random()+10);
         int IsOrder = (int)(10*Math.random()+10);
@@ -57,6 +61,7 @@ public class DataFactory {
             }else{
                 park.setState("空");
             }
+            mParkingSpaceInfos.add(park);
         }
         return mParkingSpaceInfos;
     }
@@ -68,5 +73,23 @@ public class DataFactory {
             strRand += String.valueOf((int)(Math.random() * 5)) ;
         }
         return strRand;
+    }
+
+    //随机生成消费记录
+    public static Purchase createPurchase(Context context,Car car,CarPort carPort){
+        DBManger dbManger = DBManger.getInstance(context);
+        Purchase purchase = new Purchase();
+        purchase.setUserId(dbManger.mUser.getUserId());
+        purchase.setBillId(dbManger.getRandomBILLID());
+        purchase.setBillDate(dbManger.getRandomBiiDate());
+        purchase.setCarPortId(carPort.getCarPortId());
+        purchase.setCost(dbManger.getRandomCost()+"元");
+        purchase.setPayWay("现金");//现金-M行卡-C 会员卡-V
+
+        purchase.setCar(car);
+        purchase.setCarPort(carPort);
+        purchase.setParkingSpaceInfo(carPort.getEmptyParkingSpaceInfo());
+//        purchase.setRecordId();
+        return purchase;
     }
 }

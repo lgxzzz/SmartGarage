@@ -22,6 +22,18 @@ public class CarPort implements Serializable{
     double lon;
     List<ParkingSpaceInfo> mParkingSpaceInfos = new ArrayList();
 
+
+    //返回一个空的车位
+    public ParkingSpaceInfo getEmptyParkingSpaceInfo(){
+        for (int i = 0;i<mParkingSpaceInfos.size();i++){
+            ParkingSpaceInfo parkingSpaceInfo = mParkingSpaceInfos.get(i);
+            if (parkingSpaceInfo.getState().equals("空")){
+                return parkingSpaceInfo;
+            }
+        }
+        return null;
+    }
+
     public List<ParkingSpaceInfo> getmParkingSpaceInfos() {
         return mParkingSpaceInfos;
     }

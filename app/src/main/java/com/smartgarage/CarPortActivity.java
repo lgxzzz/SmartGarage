@@ -36,6 +36,12 @@ public class CarPortActivity extends Activity{
     public void init(){
         mTitleView = findViewById(R.id.title_view);
         mTitleView.setTitle("车库信息");
+        mTitleView.setOnBackListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         mGarageName = findViewById(R.id.garage_name);
         mGarageAddress = findViewById(R.id.garage_address);
@@ -52,12 +58,12 @@ public class CarPortActivity extends Activity{
         if (carPort!=null){
             mGarageAddress.setText(carPort.getAddress());
             mGarageName.setText(carPort.getCarPortName());
-            mGarageContent.setText(carPort.getContent());
-            mGarageIsFilled.setText(carPort.getIsFilled());
-            mGarageIsOrder.setText(carPort.getIsOrder());
-            mGarageRemainingNumber.setText(carPort.getRemainingNumber());
-            mGaragePrice.setText(carPort.getPrice());
-            mGarageOrderPrice.setText(carPort.getOrderPrice());
+            mGarageContent.setText(carPort.getContent()+"");
+            mGarageIsFilled.setText(carPort.getIsFilled()+"");
+            mGarageIsOrder.setText(carPort.getIsOrder()+"");
+            mGarageRemainingNumber.setText(carPort.getRemainingNumber()+"");
+            mGaragePrice.setText(carPort.getPrice()+"");
+            mGarageOrderPrice.setText(carPort.getOrderPrice()+"");
         }
 
         mParkingPlaceBtn.setOnClickListener(new View.OnClickListener() {

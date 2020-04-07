@@ -1,11 +1,13 @@
 package com.smartgarage;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.smartgarage.adapter.ParkSpaceAdapter;
 import com.smartgarage.bean.CarPort;
@@ -48,12 +50,12 @@ public class ParkingSpaceActivity extends Activity{
             mGarageName.setText(carPort.getCarPortName());
             List<ParkingSpaceInfo> parkFill =new ArrayList<>();
             List<ParkingSpaceInfo> parkEmpty =new ArrayList<>();
-            for (int i=0;i<carPort.getContent();i++){
+            for (int i=0;i<carPort.getContent()-1;i++){
                 ParkingSpaceInfo parkingSpaceInfo = carPort.getmParkingSpaceInfos().get(i);
-                if (parkingSpaceInfo.getState().equals("已停")){
-                    parkFill.add(parkingSpaceInfo);
-                }else if(parkingSpaceInfo.getState().equals("空")){
+                if(parkingSpaceInfo.getState().equals("空")){
                     parkEmpty.add(parkingSpaceInfo);
+                }else{
+                    parkFill.add(parkingSpaceInfo);
                 }
             }
 
@@ -62,7 +64,13 @@ public class ParkingSpaceActivity extends Activity{
             mEmptyAdapter.setListener(new ParkSpaceAdapter.IOrderListener() {
                 @Override
                 public void onOrder(ParkingSpaceInfo spaceInfo) {
-                    mFillAdapter.refreshData(spaceInfo);
+
+                    Intent intent = new Intent();
+                    intent.setClass(ParkingSpaceActivity.this,SelectCarActivity.class);
+                    Bundle b = new Bundle();
+                    b.putSerializable("carPort",carPort);
+                    intent.putExtras(b);
+                    startActivity(intent);
                 }
             });
 

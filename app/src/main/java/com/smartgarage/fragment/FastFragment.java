@@ -12,11 +12,14 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
+import android.widget.Toast;
 
 import com.smartgarage.R;
 import com.smartgarage.bean.Car;
 import com.smartgarage.bean.CarPort;
+import com.smartgarage.bean.Purchase;
 import com.smartgarage.data.DBManger;
+import com.smartgarage.util.DataFactory;
 import com.smartgarage.view.FastToNaviDialog;
 
 import java.util.ArrayList;
@@ -30,6 +33,7 @@ public class FastFragment extends Fragment{
     private Button mFastReserveBtn;
     private FastToNaviDialog mDialog;
     private CarPort mSelectCarPort;
+    private Car mSelectCar;
 
     public List<Car> mCarInfos = new ArrayList<>();
     public List<CarPort> mCarPorts = new ArrayList<>();
@@ -79,11 +83,14 @@ public class FastFragment extends Fragment{
 
         SpinnerAdapter adapter1 = new ArrayAdapter<String>(getContext(),android.R.layout.simple_spinner_item,carPortlist);
         mCarPortSp.setAdapter(adapter1);
-        mSelectCarPort = mCarPorts.get(0);
-        mCarPortSp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        if (mCarPorts.size()>0){
+            mSelectCarPort = mCarPorts.get(0);
+        }
+
+        mCarsSp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
+                mSelectCar = mCarInfos.get(position);
             }
 
             @Override
@@ -91,7 +98,9 @@ public class FastFragment extends Fragment{
 
             }
         });
-
+        if (mCarInfos.size()>0){
+            mSelectCar = mCarInfos.get(0);
+        }
         mCarPortSp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -107,6 +116,17 @@ public class FastFragment extends Fragment{
         mFastReserveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (mSelectCar == null){
+                    Toast.makeText(getContext(),"请先选择车辆！",Toast.LENGTH_LONG).show();
+                    return;
+                }
+                if (mSelectCarPort == null){
+                    Toast.makeText(getContext(),"请先选择停车场！",Toast.LENGTH_LONG).show();
+                    return;
+                }
+                //生成预定订单
+                Purchase purchase = DataFactory.createPurchase(getContext(),mSelectCar,mSelectCarPort);
+                DBManger.getInstance(getContext()).setmOrderPurchase(purchase);
                 mDialog.setData(mSelectCarPort);
                 mDialog.show();
             }

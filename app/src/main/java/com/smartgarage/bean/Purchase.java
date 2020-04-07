@@ -9,6 +9,34 @@ public class Purchase {
     String Cost;
     String PayWay;
 
+    CarPort carPort;
+    Car car;
+    ParkingSpaceInfo parkingSpaceInfo;
+
+    public CarPort getCarPort() {
+        return carPort;
+    }
+
+    public void setCarPort(CarPort carPort) {
+        this.carPort = carPort;
+    }
+
+    public Car getCar() {
+        return car;
+    }
+
+    public void setCar(Car car) {
+        this.car = car;
+    }
+
+    public ParkingSpaceInfo getParkingSpaceInfo() {
+        return parkingSpaceInfo;
+    }
+
+    public void setParkingSpaceInfo(ParkingSpaceInfo parkingSpaceInfo) {
+        this.parkingSpaceInfo = parkingSpaceInfo;
+    }
+
     public String getBillId() {
         return BillId;
     }

@@ -14,6 +14,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.smartgarage.AddCarActivity;
+import com.smartgarage.FastNaviActivity;
 import com.smartgarage.LoginActivity;
 import com.smartgarage.R;
 import com.smartgarage.SplashActivity;
@@ -51,6 +52,13 @@ public class AboutFragment extends Fragment implements View.OnClickListener{
     TextView mUserTel;
     TextView mUserRFI;
     Button mUpdateBtn;
+
+    ViewGroup mOrderLayout;
+    TextView mOrderGarageName;
+    TextView mOrderParkingID;
+    TextView mOrderTime;
+    TextView mOrderCar;
+    TextView mOrderNavi;
 
     //车辆信息
     Button mAddCarBtn;
@@ -116,6 +124,15 @@ public class AboutFragment extends Fragment implements View.OnClickListener{
         mRFIid = view.findViewById(R.id.RFI_id);
         mRemain = view.findViewById(R.id.RFI_remain);
 
+
+        mOrderLayout = view.findViewById(R.id.about_person_order_layout);
+        mOrderGarageName = view.findViewById(R.id.order_garage_name);
+        mOrderParkingID = view.findViewById(R.id.order_parking_id);
+        mOrderTime = view.findViewById(R.id.order_time);
+        mOrderCar = view.findViewById(R.id.order_car);
+        mOrderNavi = view.findViewById(R.id.order_navi);
+
+
     };
 
     public void initData(){
@@ -140,6 +157,28 @@ public class AboutFragment extends Fragment implements View.OnClickListener{
         mAddMoneyListView.setAdapter(mAddMoneyAdapter);
 
         mRFIid.setText(user.getRFIID());
+
+        final Purchase mOrder =DBManger.getInstance(getContext()).getmOrderPurchase();
+        if (mOrder!=null){
+            mOrderLayout.setVisibility(View.VISIBLE);
+            mOrderGarageName.setText(mOrder.getCarPort().getCarPortName());
+            mOrderParkingID.setText(mOrder.getCarPort().getEmptyParkingSpaceInfo().getPlaceId());
+            mOrderTime.setText(mOrder.getBillDate());
+            mOrderCar.setText(mOrder.getCar().getType());
+
+            mOrderNavi.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent();
+                    intent.setClass(getContext(),FastNaviActivity.class);
+                    Bundle b = new Bundle();
+                    b.putSerializable("carPort",mOrder.getCarPort());
+                    b.putBoolean("isFastNavi",true);
+                    intent.putExtras(b);
+                    getContext().startActivity(intent);
+                }
+            });
+        }
     };
 
     @Override

@@ -28,6 +28,7 @@ public class ParkSpaceAdapter extends BaseAdapter{
     }
 
     public void refreshData(ParkingSpaceInfo parkingSpaceInfo){
+        parkingSpaceInfo.setState("已预定");
         this.mParkSpaces.add(parkingSpaceInfo);
         notifyDataSetChanged();
     }
@@ -64,6 +65,9 @@ public class ParkSpaceAdapter extends BaseAdapter{
 
         holer.mParkID.setText(spaceInfo.getPlaceId());
         holer.mParkState.setText(spaceInfo.getState());
+        if (spaceInfo.getState().equals("空")){
+            holer.mParkOrder.setVisibility(View.VISIBLE);
+        }
         holer.mParkOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

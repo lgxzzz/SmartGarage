@@ -1,6 +1,8 @@
 package com.smartgarage.bean;
 
-public class ParkingSpaceInfo {
+import java.io.Serializable;
+
+public class ParkingSpaceInfo implements Serializable {
     String PlaceId;
     String CarPortId;
     String State;

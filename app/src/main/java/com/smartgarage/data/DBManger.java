@@ -24,9 +24,15 @@ public class DBManger {
     private Context mContext;
     private SQLiteDbHelper mDBHelper;
     public User mUser;
-    private LatLng mCurPoint; //最终选择的点
+    //最终选择的点
+    private LatLng mCurPoint;
+    //车库信息
     public List<CarPort> mCarPorts = new ArrayList<>();
+    //路径信息
     public List<PathInfo> mPaths = new ArrayList<>();
+    //当前的预定信息
+    Purchase mOrderPurchase;
+
     public static  DBManger instance;
 
     public static DBManger getInstance(Context mContext){
@@ -39,6 +45,14 @@ public class DBManger {
     public DBManger(Context mContext){
         this.mContext = mContext;
         mDBHelper = new SQLiteDbHelper(mContext);
+    }
+
+    public Purchase getmOrderPurchase() {
+        return mOrderPurchase;
+    }
+
+    public void setmOrderPurchase(Purchase mOrderPurchase) {
+        this.mOrderPurchase = mOrderPurchase;
     }
 
     public List<PathInfo> getmPaths() {

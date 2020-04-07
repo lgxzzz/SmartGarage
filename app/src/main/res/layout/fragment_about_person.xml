@@ -193,6 +193,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:id="@+id/about_person_order_layout"
+        android:visibility="gone"
         >
         <LinearLayout
             android:layout_width="match_parent"
@@ -228,6 +230,7 @@
                     android:textSize="18dp"
                     android:textColor="@android:color/black"
                     android:layout_marginLeft="10dp"
+                    android:id="@+id/order_garage_name"
                     >
                 </TextView>
             </LinearLayout>
@@ -256,6 +259,7 @@
                 android:textSize="18dp"
                 android:textColor="@android:color/black"
                 android:layout_marginLeft="10dp"
+                android:id="@+id/order_parking_id"
                 >
             </TextView>
             <Button
@@ -265,6 +269,7 @@
                 android:text="导航"
                 android:background="@android:color/holo_blue_bright"
                 android:layout_marginRight="10dp"
+                android:id="@+id/order_navi"
                 >
             </Button>
         </LinearLayout>
@@ -291,6 +296,7 @@
                 android:textSize="18dp"
                 android:textColor="@android:color/black"
                 android:layout_marginLeft="10dp"
+                android:id="@+id/order_time"
                 >
             </TextView>
         </LinearLayout>
@@ -316,6 +322,7 @@
                 android:textSize="18dp"
                 android:textColor="@android:color/black"
                 android:layout_marginLeft="10dp"
+                android:id="@+id/order_car"
                 >
             </TextView>
         </LinearLayout>
