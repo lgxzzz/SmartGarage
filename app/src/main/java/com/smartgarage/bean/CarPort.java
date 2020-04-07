@@ -3,6 +3,8 @@ package com.smartgarage.bean;
 import org.json.JSONObject;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CarPort implements Serializable{
 
@@ -18,6 +20,15 @@ public class CarPort implements Serializable{
     String Induction;
     double lat;
     double lon;
+    List<ParkingSpaceInfo> mParkingSpaceInfos = new ArrayList();
+
+    public List<ParkingSpaceInfo> getmParkingSpaceInfos() {
+        return mParkingSpaceInfos;
+    }
+
+    public void setmParkingSpaceInfos(List<ParkingSpaceInfo> mParkingSpaceInfos) {
+        this.mParkingSpaceInfos = mParkingSpaceInfos;
+    }
 
     public double getLat() {
         return lat;
