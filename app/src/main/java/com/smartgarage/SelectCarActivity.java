@@ -90,10 +90,19 @@ public class SelectCarActivity extends AppCompatActivity {
 
                 //生成预定订单
                 Purchase purchase = DataFactory.createPurchase(SelectCarActivity.this,mSelectCar,mSelectCarPort);
-                DBManger.getInstance(SelectCarActivity.this).setmOrderPurchase(purchase);
-                Toast.makeText(SelectCarActivity.this,"预定成功，点击个人中心查看",Toast.LENGTH_LONG).show();
-                Intent intentmain=new Intent(SelectCarActivity.this,MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intentmain);
+                DBManger.getInstance(SelectCarActivity.this).setmOrderPurchase(purchase, new DBManger.IListener() {
+                    @Override
+                    public void onSuccess() {
+                        Toast.makeText(SelectCarActivity.this,"预定成功，点击个人中心查看",Toast.LENGTH_LONG).show();
+                        Intent intentmain=new Intent(SelectCarActivity.this,MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intentmain);
+                    }
+
+                    @Override
+                    public void onError(String error) {
+
+                    }
+                });
             }
         });
     };

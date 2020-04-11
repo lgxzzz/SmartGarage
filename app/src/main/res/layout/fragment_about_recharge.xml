@@ -61,7 +61,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="142元"
+                android:text="0元"
                 android:textColor="@android:color/black"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
@@ -72,7 +72,7 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="30dp"
-            android:id="@+id/recharge_btn"
+            android:id="@+id/add_recharge_btn"
             android:text="充值"
             android:background="@android:color/holo_blue_bright"
             android:layout_gravity="center"

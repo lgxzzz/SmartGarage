@@ -3,13 +3,17 @@ package com.smartgarage.util;
 import android.content.Context;
 import android.content.Intent;
 
+import com.smartgarage.bean.AddMoney;
 import com.smartgarage.bean.Car;
 import com.smartgarage.bean.CarPort;
 import com.smartgarage.bean.ParkingSpaceInfo;
 import com.smartgarage.bean.Purchase;
+import com.smartgarage.bean.User;
 import com.smartgarage.data.DBManger;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -83,13 +87,41 @@ public class DataFactory {
         purchase.setBillId(dbManger.getRandomBILLID());
         purchase.setBillDate(dbManger.getRandomBiiDate());
         purchase.setCarPortId(carPort.getCarPortId());
-        purchase.setCost(dbManger.getRandomCost()+"元");
-        purchase.setPayWay("现金");//现金-M行卡-C 会员卡-V
+        purchase.setCost(dbManger.getRandomCost());
+        purchase.setPayWay("会员卡");//现金-M行卡-C 会员卡-V
 
         purchase.setCar(car);
         purchase.setCarPort(carPort);
         purchase.setParkingSpaceInfo(carPort.getEmptyParkingSpaceInfo());
 //        purchase.setRecordId();
         return purchase;
+    }
+
+    //生成充值记录
+    public static AddMoney createAddMoney(User mUser,String PayWay,String Cost){
+        AddMoney addMoney = new AddMoney();
+        addMoney.setUserId(mUser.getUserId());
+        addMoney.setAddDate(getRandomBiiDate());
+        addMoney.setAddId(getRandomADDID());
+        addMoney.setAddMoney(Cost);
+        addMoney.setPayWay(PayWay);
+        return addMoney;
+    }
+
+    //生成账单日期
+    public static String getRandomBiiDate(){
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date date = new Date(System.currentTimeMillis());
+        String dateStr = simpleDateFormat.format(date);
+        return dateStr;
+    }
+
+    //生成随机10位的充值编号
+    public static String getRandomADDID(){
+        String strRand="A" ;
+        for(int i=0;i<5;i++){
+            strRand += String.valueOf((int)(Math.random() * 5)) ;
+        }
+        return strRand;
     }
 }

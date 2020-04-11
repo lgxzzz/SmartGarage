@@ -51,8 +51,9 @@ public class DBManger {
         return mOrderPurchase;
     }
 
-    public void setmOrderPurchase(Purchase mOrderPurchase) {
+    public void setmOrderPurchase(Purchase mOrderPurchase,IListener listener) {
         this.mOrderPurchase = mOrderPurchase;
+        insertPurchase(mOrderPurchase,listener);
     }
 
     public List<PathInfo> getmPaths() {
@@ -117,8 +118,54 @@ public class DBManger {
             long code = db.insert(SQLiteDbHelper.TAB_CARINFO,null,values);
             listener.onSuccess();
         }catch (Exception e){
+            listener.onError("");
             e.printStackTrace();
         }
+    }
+
+    //添加充值信息
+    public void insertAddMoney(AddMoney addMoney,IListener listener){
+        try{
+            ContentValues values = new ContentValues();
+            values.put("AddId",addMoney.getAddId());
+            values.put("UserId",addMoney.getUserId());
+            values.put("AddDate",addMoney.getAddDate());
+            values.put("AddMoney",addMoney.getAddMoney());
+            values.put("PayWay",addMoney.getPayWay());
+            SQLiteDatabase db = mDBHelper.getWritableDatabase();
+            long code = db.insert(SQLiteDbHelper.TAB_ADDMONEYINFO,null,values);
+            listener.onSuccess();
+        }catch (Exception e){
+            listener.onError("");
+            e.printStackTrace();
+        }
+    }
+
+    public List<AddMoney> getAddMoneys(){
+        List<AddMoney> addMoneys = new ArrayList<>();
+        try{
+            SQLiteDatabase db = mDBHelper.getWritableDatabase();
+            Cursor cursor = db.query(SQLiteDbHelper.TAB_ADDMONEYINFO,null,null,null,null,null,null);
+            while (cursor.moveToNext()){
+                String AddId = cursor.getString(cursor.getColumnIndex("AddId"));
+                String UserId = cursor.getString(cursor.getColumnIndex("UserId"));
+                String AddDate = cursor.getString(cursor.getColumnIndex("AddDate"));
+                String AddMoney = cursor.getString(cursor.getColumnIndex("AddMoney"));
+                String PayWay = cursor.getString(cursor.getColumnIndex("PayWay"));
+
+                AddMoney addMoney = new AddMoney();
+                addMoney.setAddId(AddId);
+                addMoney.setUserId(UserId);
+                addMoney.setAddDate(AddDate);
+                addMoney.setAddMoney(AddMoney);
+                addMoney.setPayWay(PayWay);
+
+                addMoneys.add(addMoney);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return addMoneys;
     }
 
     //用户注册时生成一张RFI卡
@@ -262,6 +309,55 @@ public class DBManger {
         }
         return purchases;
     };
+
+    //添加车辆
+    public void insertPurchase(Purchase purchase,IListener listener){
+        try{
+            ContentValues values = new ContentValues();
+            values.put("CarPortId",purchase.getCarPortId());
+            values.put("BillId",purchase.getBillId());
+            values.put("RecordId",purchase.getRecordId());
+            values.put("UserId",purchase.getUserId());
+            values.put("BillDate",purchase.getBillDate());
+            values.put("Cost",purchase.getCost());
+            values.put("PayWay",purchase.getPayWay());
+            SQLiteDatabase db = mDBHelper.getWritableDatabase();
+            long code = db.insert(SQLiteDbHelper.TAB_BILLINFO,null,values);
+            listener.onSuccess();
+        }catch (Exception e){
+            listener.onError("");
+            e.printStackTrace();
+        }
+    }
+
+    public List<Purchase> getPurchases(){
+        List<Purchase> purchases = new ArrayList<>();
+        try{
+            SQLiteDatabase db = mDBHelper.getWritableDatabase();
+            Cursor cursor = db.query(SQLiteDbHelper.TAB_BILLINFO,null,null,null,null,null,null);
+            while (cursor.moveToNext()){
+                String BillId = cursor.getString(cursor.getColumnIndex("BillId"));
+                String CarPortId = cursor.getString(cursor.getColumnIndex("CarPortId"));
+                String RecordId = cursor.getString(cursor.getColumnIndex("RecordId"));
+                String UserId = cursor.getString(cursor.getColumnIndex("UserId"));
+                String BillDate = cursor.getString(cursor.getColumnIndex("BillDate"));
+                String Cost = cursor.getString(cursor.getColumnIndex("Cost"));
+                String PayWay = cursor.getString(cursor.getColumnIndex("PayWay"));
+
+                Purchase purchase = new Purchase();
+                purchase.setUserId(UserId);
+                purchase.setBillId(BillId);
+                purchase.setBillDate(BillDate);
+                purchase.setCarPortId(CarPortId);
+                purchase.setCost(Cost);
+                purchase.setPayWay(PayWay);//现金-M行卡-C 会员卡-V
+                purchases.add(purchase);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return purchases;
+    }
 
     //生成默认充值金额
     public List<AddMoney> getDefaultAddMoneyData(){

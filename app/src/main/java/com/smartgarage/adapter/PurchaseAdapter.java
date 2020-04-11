@@ -56,7 +56,7 @@ public class PurchaseAdapter extends BaseAdapter{
         }
 
         holer.mPurchaseTime.setText(purchase.getBillDate());
-        holer.mPurchaseCost.setText(purchase.getCost());
+        holer.mPurchaseCost.setText(purchase.getCost()+"元");
         holer.mPurchaseDetail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

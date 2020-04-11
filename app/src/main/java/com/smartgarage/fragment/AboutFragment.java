@@ -17,6 +17,8 @@ import com.smartgarage.AddCarActivity;
 import com.smartgarage.FastNaviActivity;
 import com.smartgarage.LoginActivity;
 import com.smartgarage.R;
+import com.smartgarage.ReChargeActivity;
+import com.smartgarage.RouteNaviActivity;
 import com.smartgarage.SplashActivity;
 import com.smartgarage.UpdateActivity;
 import com.smartgarage.adapter.AddMoneyAdapter;
@@ -77,6 +79,7 @@ public class AboutFragment extends Fragment implements View.OnClickListener{
     AddMoneyAdapter mAddMoneyAdapter;
     TextView mRFIid;
     TextView mRemain;
+    Button mAddRechargeBtn;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -123,6 +126,15 @@ public class AboutFragment extends Fragment implements View.OnClickListener{
 
         mRFIid = view.findViewById(R.id.RFI_id);
         mRemain = view.findViewById(R.id.RFI_remain);
+        mAddRechargeBtn = view.findViewById(R.id.add_recharge_btn);
+        mAddRechargeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent();
+                intent.setClass(getContext(), ReChargeActivity.class);
+                getContext().startActivity(intent);
+            }
+        });
 
 
         mOrderLayout = view.findViewById(R.id.about_person_order_layout);
@@ -148,13 +160,17 @@ public class AboutFragment extends Fragment implements View.OnClickListener{
         mCarAdpater = new CarAdapter(getContext(),mCarInfos);
         mCarListView.setAdapter(mCarAdpater);
 
-        mPurchases = DBManger.getInstance(getContext()).getDefaultBillData();
+        mPurchases = DBManger.getInstance(getContext()).getPurchases();
         mPurchaseAdapter = new PurchaseAdapter(getContext(),mPurchases);
         mPurchaseListview.setAdapter(mPurchaseAdapter);
 
-        mAddMoneys = DBManger.getInstance(getContext()).getDefaultAddMoneyData();
+        mAddMoneys = DBManger.getInstance(getContext()).getAddMoneys();
         mAddMoneyAdapter = new AddMoneyAdapter(getContext(),mAddMoneys);
         mAddMoneyListView.setAdapter(mAddMoneyAdapter);
+
+        //计算余额
+        String Remain = CalculateRemain();
+        mRemain.setText(Remain);
 
         mRFIid.setText(user.getRFIID());
 
@@ -170,7 +186,7 @@ public class AboutFragment extends Fragment implements View.OnClickListener{
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent();
-                    intent.setClass(getContext(),FastNaviActivity.class);
+                    intent.setClass(getContext(), RouteNaviActivity.class);
                     Bundle b = new Bundle();
                     b.putSerializable("carPort",mOrder.getCarPort());
                     b.putBoolean("isFastNavi",true);
@@ -241,5 +257,30 @@ public class AboutFragment extends Fragment implements View.OnClickListener{
     public void onResume() {
         super.onResume();
         initData();
+    }
+
+    //计算余额
+    public String CalculateRemain(){
+        String remain = "0";
+        try{
+            int Add = 0;
+            int Del = 0;
+
+            for (int i=0;i<mAddMoneys.size();i++){
+                AddMoney addMoney = mAddMoneys.get(i);
+                Add  = Add+(Integer.parseInt(addMoney.getAddMoney()));
+            }
+
+            for (int i=0;i<mPurchases.size();i++){
+                Purchase purchase = mPurchases.get(i);
+                Del  = Del+(Integer.parseInt(purchase.getCost()));
+            }
+
+            remain = (Add - Del)+"";
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return remain;
     }
 }

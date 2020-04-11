@@ -42,6 +42,7 @@
         <activity android:name=".PathActivity"/>
         <activity android:name=".SelectCarActivity"/>
         <activity android:name=".RouteNaviActivity"/>
+        <activity android:name=".ReChargeActivity"/>
         <service android:name="com.amap.api.location.APSService"></service>
         <activity android:name="com.amap.api.navi.AmapRouteActivity"
             android:theme="@android:style/Theme.NoTitleBar"

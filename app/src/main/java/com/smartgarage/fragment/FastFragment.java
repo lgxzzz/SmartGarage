@@ -126,7 +126,17 @@ public class FastFragment extends Fragment{
                 }
                 //生成预定订单
                 Purchase purchase = DataFactory.createPurchase(getContext(),mSelectCar,mSelectCarPort);
-                DBManger.getInstance(getContext()).setmOrderPurchase(purchase);
+                DBManger.getInstance(getContext()).setmOrderPurchase(purchase, new DBManger.IListener() {
+                    @Override
+                    public void onSuccess() {
+
+                    }
+
+                    @Override
+                    public void onError(String error) {
+
+                    }
+                });
                 mDialog.setData(mSelectCarPort);
                 mDialog.show();
             }

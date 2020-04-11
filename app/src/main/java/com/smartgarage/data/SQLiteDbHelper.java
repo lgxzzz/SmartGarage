@@ -14,7 +14,7 @@ public class SQLiteDbHelper extends SQLiteOpenHelper {
     //数据库名称
     public static final String DB_NAME = "SmartCar.db";
     //数据库版本号
-    public static int DB_VERSION = 11;
+    public static int DB_VERSION = 15;
     //用户表
     public static final String TAB_USER = "UserInfo";
     //用户角色表
@@ -56,12 +56,12 @@ public class SQLiteDbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
-//        db.execSQL("DROP TABLE IF EXISTS "+TAB_USER);
-//        db.execSQL("DROP TABLE IF EXISTS "+TAB_ROLE);
-//        db.execSQL("DROP TABLE IF EXISTS "+TAB_CARINFO);
+        db.execSQL("DROP TABLE IF EXISTS "+TAB_USER);
+        db.execSQL("DROP TABLE IF EXISTS "+TAB_ROLE);
+        db.execSQL("DROP TABLE IF EXISTS "+TAB_CARINFO);
         db.execSQL("DROP TABLE IF EXISTS "+TAB_CARPORTINFO);
         db.execSQL("DROP TABLE IF EXISTS "+TAB_PARKINGSAPCEINFO);
-//        db.execSQL("DROP TABLE IF EXISTS "+TAB_RFI);
+        db.execSQL("DROP TABLE IF EXISTS "+TAB_RFI);
         db.execSQL("DROP TABLE IF EXISTS "+TAB_PARKINGINFO);
         db.execSQL("DROP TABLE IF EXISTS "+TAB_BILLINFO);
         db.execSQL("DROP TABLE IF EXISTS "+TAB_ROUTEINFO);
