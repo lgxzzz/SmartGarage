@@ -10,9 +10,17 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:background="@drawable/backgroud1"
         >
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+
+        >
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -61,7 +69,17 @@
                 />
         </LinearLayout>
     </LinearLayout>
-
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:id="@+id/recharge_btn"
+            android:text="充值"
+            android:background="@android:color/holo_blue_bright"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_margin="5dp"
+            />
+    </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -95,11 +113,11 @@
                 android:gravity="center"
                 />
         </LinearLayout>
+
         <ListView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:id="@+id/recharge_listview"
-            >
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
         </ListView>
     </LinearLayout>
