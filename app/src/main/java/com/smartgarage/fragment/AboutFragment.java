@@ -179,7 +179,7 @@ public class AboutFragment extends Fragment implements View.OnClickListener{
             mOrderLayout.setVisibility(View.VISIBLE);
             mOrderGarageName.setText(mOrder.getCarPort().getCarPortName());
             mOrderParkingID.setText(mOrder.getCarPort().getEmptyParkingSpaceInfo().getPlaceId());
-            mOrderTime.setText(mOrder.getBillDate());
+            mOrderTime.setText(mOrder.getTime());
             mOrderCar.setText(mOrder.getCar().getType());
 
             mOrderNavi.setOnClickListener(new View.OnClickListener() {

@@ -80,7 +80,7 @@ public class DataFactory {
     }
 
     //随机生成消费记录
-    public static Purchase createPurchase(Context context,Car car,CarPort carPort){
+    public static Purchase createPurchase(Context context,Car car,CarPort carPort,String time){
         DBManger dbManger = DBManger.getInstance(context);
         Purchase purchase = new Purchase();
         purchase.setUserId(dbManger.mUser.getUserId());
@@ -89,6 +89,8 @@ public class DataFactory {
         purchase.setCarPortId(carPort.getCarPortId());
         purchase.setCost(dbManger.getRandomCost());
         purchase.setPayWay("会员卡");//现金-M行卡-C 会员卡-V
+        purchase.setPayWay("会员卡");//现金-M行卡-C 会员卡-V
+        purchase.setTime(time);
 
         purchase.setCar(car);
         purchase.setCarPort(carPort);

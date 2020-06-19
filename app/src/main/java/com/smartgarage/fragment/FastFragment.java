@@ -22,7 +22,10 @@ import com.smartgarage.data.DBManger;
 import com.smartgarage.util.DataFactory;
 import com.smartgarage.view.FastToNaviDialog;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -124,8 +127,13 @@ public class FastFragment extends Fragment{
                     Toast.makeText(getContext(),"请先选择停车场！",Toast.LENGTH_LONG).show();
                     return;
                 }
+                //快速预定是当前时间加半个小时
+                long currentTime = System.currentTimeMillis() + 30 * 60 * 1000;
+                Date date = new Date(currentTime);
+                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                String nowTime= df.format(date);
                 //生成预定订单
-                Purchase purchase = DataFactory.createPurchase(getContext(),mSelectCar,mSelectCarPort);
+                Purchase purchase = DataFactory.createPurchase(getContext(),mSelectCar,mSelectCarPort,nowTime);
                 DBManger.getInstance(getContext()).setmOrderPurchase(purchase, new DBManger.IListener() {
                     @Override
                     public void onSuccess() {

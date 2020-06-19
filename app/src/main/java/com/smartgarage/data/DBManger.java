@@ -321,6 +321,7 @@ public class DBManger {
             values.put("BillDate",purchase.getBillDate());
             values.put("Cost",purchase.getCost());
             values.put("PayWay",purchase.getPayWay());
+            values.put("Time",purchase.getTime());
             SQLiteDatabase db = mDBHelper.getWritableDatabase();
             long code = db.insert(SQLiteDbHelper.TAB_BILLINFO,null,values);
             listener.onSuccess();
@@ -343,6 +344,7 @@ public class DBManger {
                 String BillDate = cursor.getString(cursor.getColumnIndex("BillDate"));
                 String Cost = cursor.getString(cursor.getColumnIndex("Cost"));
                 String PayWay = cursor.getString(cursor.getColumnIndex("PayWay"));
+                String Time = cursor.getString(cursor.getColumnIndex("Time"));
 
                 Purchase purchase = new Purchase();
                 purchase.setUserId(UserId);
@@ -350,6 +352,7 @@ public class DBManger {
                 purchase.setBillDate(BillDate);
                 purchase.setCarPortId(CarPortId);
                 purchase.setCost(Cost);
+                purchase.setTime(Time);
                 purchase.setPayWay(PayWay);//现金-M行卡-C 会员卡-V
                 purchases.add(purchase);
             }

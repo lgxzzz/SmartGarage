@@ -8,6 +8,7 @@ public class Purchase {
     String BillDate;
     String Cost;
     String PayWay;
+    String Time;
 
     CarPort carPort;
     Car car;
@@ -91,5 +92,13 @@ public class Purchase {
 
     public void setPayWay(String payWay) {
         PayWay = payWay;
+    }
+
+    public String getTime() {
+        return Time;
+    }
+
+    public void setTime(String time) {
+        Time = time;
     }
 }

@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.smartgarage.bean.Car;
@@ -22,6 +23,7 @@ import com.smartgarage.bean.User;
 import com.smartgarage.data.DBManger;
 import com.smartgarage.util.DataFactory;
 import com.smartgarage.view.FastToNaviDialog;
+import com.smartgarage.view.SelectDateDialog;
 import com.smartgarage.view.TitleView;
 
 import java.util.ArrayList;
@@ -31,11 +33,21 @@ import java.util.List;
 public class SelectCarActivity extends AppCompatActivity {
 
     private Spinner mCarsSp;
+    private Button mDateSp;
+    private Button mTimeSp;
     private Button mReserveBtn;
     private CarPort mSelectCarPort;
     private Car mSelectCar;
-
+    private SelectDateDialog mSelectDateDialog;
     public List<Car> mCarInfos = new ArrayList<>();
+
+    boolean isSelectDate = false;
+    boolean isSelectTime = false;
+
+    String mSelectTime = "";
+    String mSelectDate = "";
+    String mSelectFianlTime = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +60,10 @@ public class SelectCarActivity extends AppCompatActivity {
     public void initView(){
         mCarsSp = findViewById(R.id.spinner_car);
         mReserveBtn = findViewById(R.id.reserve_btn);
+        mDateSp = findViewById(R.id.spinner_date);
+        mTimeSp = findViewById(R.id.spinner_time);
+
+        mSelectDateDialog = new SelectDateDialog(this, R.layout.dialog_select_date, true, true);
     };
 
     public void initData(){
@@ -79,6 +95,38 @@ public class SelectCarActivity extends AppCompatActivity {
             mSelectCar = mCarInfos.get(0);
         }
 
+        mDateSp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mSelectDateDialog.setSelectDate(true);
+                mSelectDateDialog.show();
+            }
+        });
+
+        mTimeSp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mSelectDateDialog.setSelectDate(false);
+                mSelectDateDialog.show();
+            }
+        });
+
+        mSelectDateDialog.setListener(new SelectDateDialog.IOnSelectListener() {
+            @Override
+            public void onSelectDate(String date) {
+                isSelectDate = true;
+                mSelectDate = date;
+                mDateSp.setText(date);
+            }
+
+            @Override
+            public void onSelectTime(String time) {
+                isSelectTime = true;
+                mSelectTime = time;
+                mTimeSp.setText(time);
+            }
+        });
+
 
         mReserveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,9 +135,17 @@ public class SelectCarActivity extends AppCompatActivity {
                     Toast.makeText(SelectCarActivity.this,"请先选择车辆！",Toast.LENGTH_LONG).show();
                     return;
                 }
-
+                if (!isSelectDate){
+                    Toast.makeText(SelectCarActivity.this,"请先选择日期！",Toast.LENGTH_LONG).show();
+                    return;
+                }
+                if (!isSelectTime){
+                    Toast.makeText(SelectCarActivity.this,"请先选择时间！",Toast.LENGTH_LONG).show();
+                    return;
+                }
+                mSelectFianlTime = mSelectDate +" "+mSelectTime;
                 //生成预定订单
-                Purchase purchase = DataFactory.createPurchase(SelectCarActivity.this,mSelectCar,mSelectCarPort);
+                Purchase purchase = DataFactory.createPurchase(SelectCarActivity.this,mSelectCar,mSelectCarPort,mSelectFianlTime);
                 DBManger.getInstance(SelectCarActivity.this).setmOrderPurchase(purchase, new DBManger.IListener() {
                     @Override
                     public void onSuccess() {

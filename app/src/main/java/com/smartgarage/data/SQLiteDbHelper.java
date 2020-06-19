@@ -14,7 +14,7 @@ public class SQLiteDbHelper extends SQLiteOpenHelper {
     //数据库名称
     public static final String DB_NAME = "SmartCar.db";
     //数据库版本号
-    public static int DB_VERSION = 15;
+    public static int DB_VERSION = 16;
     //用户表
     public static final String TAB_USER = "UserInfo";
     //用户角色表
@@ -149,6 +149,7 @@ public class SQLiteDbHelper extends SQLiteOpenHelper {
 
     //创建消费表
     public void createTableBillInfo(SQLiteDatabase db){
+
         db.execSQL("CREATE TABLE IF NOT EXISTS "+TAB_BILLINFO +
                 "(BillId varchar(60) primary key, " +
                 "CarPortId varchar(60), " +
@@ -156,6 +157,7 @@ public class SQLiteDbHelper extends SQLiteOpenHelper {
                 "UserId varchar(60), " +
                 "BillDate varchar(60), " +
                 "Cost varchar(60), " +
+                "Time varchar(60), " +
                 "PayWay varchar(60))");
     }
 
